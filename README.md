@@ -99,32 +99,32 @@ Observação: a leitura de códigos de barras é uma etapa auxiliar. Se algum co
 
 O pipeline evita conversão cega de PDF para Word. Em vez disso:
 
-1. Extrai o texto do PDF por página com `pdfplumber`.
-2. Usa coordenadas fixas por região para capturar os campos principais, assumindo o layout estável do GAL.
-3. Usa leitura de barcode para recuperar `Requisição` e `Código` quando esses campos não vêm como texto embutido no PDF.
-4. Reconstroi cada página em um `DOCX` separado, com tabelas e bordas.
-5. Gera também uma versão `HTML` separada por amostra, com áreas `contenteditable`.
-6. Mantém campos operacionais vazios como células editáveis para preenchimento durante a rotina.
+1. Extrai o texto do PDF por página com `pdfplumber`
+2. Usa coordenadas fixas por região para capturar os campos principais, assumindo o layout estável do GAL
+3. Usa leitura de barcode para recuperar `Requisição` e `Código` quando esses campos não vêm como texto embutido no PDF
+4. Reconstroi cada página em um `DOCX` separado, com tabelas e bordas
+5. Gera também uma versão `HTML` separada por amostra, com áreas `contenteditable`
+6. Mantém campos operacionais vazios como células editáveis para preenchimento durante a rotina
 
 Há fallback para `pdftotext` quando a extração principal falha, mas a reconstrução mais fiel depende da estratégia por coordenadas.
 
 ## Saídas
 
-- `DOCX`: melhor integração com Word e LibreOffice.
-- `HTML`: tende a ficar mais fiel visualmente em alguns cenários e é útil como alternativa de edição.
-- Os arquivos são salvos individualmente por paciente. Nomes inválidos no Windows são sanitizados automaticamente.
+- `DOCX`: melhor integração com Word e LibreOffice
+- `HTML`: tende a ficar mais fiel visualmente em alguns cenários e é útil como alternativa de edição
+- Os arquivos são salvos individualmente por paciente. Nomes inválidos no Windows são sanitizados automaticamente
 
 ## Limitações esperadas
 
-- A fidelidade visual depende da consistência do PDF de origem. Se o sistema GAL mudar o layout, os recortes por coordenada precisarão de ajuste em [src/extract.py](/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/GAL/src/extract.py).
-- `DOCX` recriado por tabela preserva a organização do formulário, mas não replica 100% da tipografia e microespaçamentos do PDF.
-- Campos originalmente vazios no PDF permanecem vazios e editáveis no `DOCX` e no `HTML`. Isso é intencional para uso operacional.
-- O HTML é editável no navegador, mas salvar alterações depende do editor utilizado. Para rotina formal, o `DOCX` tende a ser mais prático.
-- PDFs digitalizados sem texto embutido exigiriam OCR, o que não faz parte desta primeira versão.
+- A fidelidade visual depende da consistência do PDF de origem. Se o sistema GAL mudar o layout, os recortes por coordenada precisarão de ajuste
+- `DOCX` recriado por tabela preserva a organização do formulário, mas não replica 100% da tipografia e microespaçamentos do PDF
+- Campos originalmente vazios no PDF permanecem vazios e editáveis no `DOCX` e no `HTML`. Isso é intencional para uso operacional
+- O HTML é editável no navegador, mas salvar alterações depende do editor utilizado. Para rotina formal, o `DOCX` tende a ser mais prático
+- PDFs digitalizados sem texto embutido exigiriam OCR, o que não faz parte desta primeira versão
 
-## Ajustes futuros sugeridos
+## Ajustes futuros...
 
-- Refinar as coordenadas por tipo de exame.
-- Criar templates específicos por setor/exame.
-- Adicionar exportação intermediária em JSON para auditoria e teste.
-- Incluir marcação de campos selecionáveis no `DOCX` com controles mais avançados, se houver necessidade.
+- Refinar as coordenadas por tipo de exame
+- Criar templates específicos por exame
+- Adicionar exportação intermediária em JSON para auditoria e teste
+
