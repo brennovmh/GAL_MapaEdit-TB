@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging / build artifacts
+build/
+dist/
+*.spec
+
+# Installer / build logs
+build_windows.log
+diagnostico_windows.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Generated project outputs
+output/
+*.docx
+*.html
+
+# Input PDFs and local validation files
+input/
+*.pdf
+
+# Local editor / OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
+
+# Local Codex metadata
+.codex
